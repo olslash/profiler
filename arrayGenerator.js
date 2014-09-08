@@ -42,6 +42,8 @@ params = {
   steps: 10
 };
 
+module.exports = arrayGenerator;
+
 var myGen = arrayGenerator(params);
 console.log(myGen());
 console.log(myGen());
