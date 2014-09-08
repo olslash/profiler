@@ -54,9 +54,3 @@ function runTest(fn, generator) {
 
   return results;
 }
-var doathing = function(data) {
-  var assign = 0;
-  for(var i = 0; i < data.length; i++) {
-    assign = data + 20;
-  }
-};
