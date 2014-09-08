@@ -82,16 +82,17 @@ function stringGenerator(params) {
   };
 }
 
-params = {
-  charset: {
-    alpha: true, // random upper and lower letters charcodes 65 to 90, 97 to 122
-    ascii: false, // charcodes 32 to 64, 91 to 96, 123 to 126, excl 48 to 57
-    numbers: true, // charcodes 48 to 57
-    spaces: true // 32
-  },
-  minLength: 5,
-  maxLength: 20,
-  steps: 10
-};
+// example params
+// params = {
+//   charset: {
+//     alpha: true, // random upper and lower letters charcodes 65 to 90, 97 to 122
+//     ascii: false, // charcodes 32 to 64, 91 to 96, 123 to 126, excl 48 to 57
+//     numbers: true, // charcodes 48 to 57
+//     spaces: true // 32
+//   },
+//   minLength: 5,
+//   maxLength: 20,
+//   steps: 10
+// };
 
 module.exports = stringGenerator;
