@@ -15,11 +15,11 @@ function drawChart() {
     steps: 40
   };
   var options = {
-         title: 'Performance'
+         title: 'Performance',
+         curveType: 'function'
        };
   var myGen = arrayGenerator(params);
   var data = google.visualization.arrayToDataTable(runTest(doathing, myGen));
-  console.log(data);
   var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
   chart.draw(data, options);
 }
@@ -42,13 +42,13 @@ function runTest(fn, generator) {
       return results;
     }
     var datasize = dataset.length;
-    var start = new Date();
+    var start = window.performance.now();
     // var timer = process.hrtime();
     fn(dataset);
     // var executiontime = process.hrtime(timer);
     // var decimalseconds = (executiontime[1] / 1000000000).toFixed(2);
     // var executionresult = +executiontime[0] + +decimalseconds;
-    var executionresult = new Date() - start;
+    var executionresult = window.performance.now() - start;
     results.push([datasize, executionresult]);
   }
 
