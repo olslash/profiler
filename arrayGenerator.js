@@ -16,7 +16,6 @@ function arrayGenerator(params) {
   }
 
   var stepLength = (maxLength - minLength) / steps;
-  console.log("steplength", stepLength);
   return function() {
     callCounter++;
 
