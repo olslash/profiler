@@ -2,7 +2,7 @@ var randomIntFromInterval = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-function makeCharacterPool(alpha, ascii) {
+function makeCharacterPool(alpha, ascii, numbers, spaces) {
   var characterPool = [];
   var i;
   if(alpha) {
@@ -15,7 +15,10 @@ function makeCharacterPool(alpha, ascii) {
   }
 
   if(ascii) {
-    for(i = 33; i <= 74; i++) {
+    for(i = 33; i <= 47; i++) {
+      characterPool.push(i);
+    }
+    for(i = 58; i <= 64; i++) {
       characterPool.push(i);
     }
     for(i = 91; i <= 96; i++) {
@@ -26,6 +29,17 @@ function makeCharacterPool(alpha, ascii) {
     }
   }
 
+  if(numbers) {
+    for(i = 48; i <= 57; i++) {
+      characterPool.push(i);
+    }
+  }
+  if(spaces) {
+    // give spaces a good chance of showing up
+    for(i = 0; i < 5; i++) {
+      characterPool.push(32);
+    }
+  }
   return characterPool;
 }
 
@@ -35,41 +49,52 @@ function stringGenerator(params) {
 
   var alpha = true;
   var ascii = false;
+  var numbers = false;
+  var spaces = false;
+
   var minLength = params.minLength || 10;
   var maxLength = params.maxLength || 1000;
   var steps = params.steps || 5;
   
   if(params.charset) {
-    alpha = params.charset.alpha || alpha;
-    ascii = params.charset.ascii || ascii;
+    alpha = params.charset.alpha === undefined ? alpha : params.charset.alpha;
+    ascii = params.charset.ascii === undefined ? ascii : params.charset.ascii;
+    numbers = params.charset.numbers  === undefined ? numbers : params.charset.numbers;
+    spaces = params.charset.spaces  === undefined ? spaces : params.charset.spaces;
   }
-  var pool = makeCharacterPool(alpha, ascii);
+  var pool = makeCharacterPool(alpha, ascii, numbers, spaces);
+
   var stepLength = (maxLength - minLength) / steps + minLength;
 
   return function() {
     callCounter++;
 
     if(callCounter > steps) return;
-    var array = [];
+    var result = [];
 
     for(var i = 0; i < stepLength * callCounter; i++) {
-      array.push(pool[randomIntFromInterval(0, pool.length)]);
+      var randomChar = pool[randomIntFromInterval(0, pool.length - 1)];
+      var thisChar = String.fromCharCode(randomChar);
+      result.push(thisChar);
     }
 
-    return array;
+    return result.join('');
   };
 }
 
 params = {
   charset: {
     alpha: true, // random upper and lower letters charcodes 65 to 90, 97 to 122
-    ascii: true // charcodes 33 to 74, 91 to 96, 123 to 126
+    ascii: false, // charcodes 32 to 64, 91 to 96, 123 to 126, excl 48 to 57
+    numbers: true, // charcodes 48 to 57
+    spaces: true // 32
   },
   minLength: 5,
   maxLength: 20,
   steps: 10
 };
 
+module.exports = stringGenerator;
 // var myGen = stringGenerator(params);
 // console.log(myGen());
 // console.log(myGen());
