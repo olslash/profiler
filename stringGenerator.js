@@ -64,7 +64,7 @@ function stringGenerator(params) {
   }
   var pool = makeCharacterPool(alpha, ascii, numbers, spaces);
 
-  var stepLength = (maxLength - minLength) / steps + minLength;
+  var stepLength = (maxLength - minLength) / steps;
 
   return function() {
     callCounter++;
@@ -72,7 +72,7 @@ function stringGenerator(params) {
     if(callCounter > steps) return;
     var result = [];
 
-    for(var i = 0; i < stepLength * callCounter; i++) {
+    for(var i = 0; i < (stepLength * callCounter) + minLength; i++) {
       var randomChar = pool[randomIntFromInterval(0, pool.length - 1)];
       var thisChar = String.fromCharCode(randomChar);
       result.push(thisChar);
@@ -95,7 +95,3 @@ params = {
 };
 
 module.exports = stringGenerator;
-// var myGen = stringGenerator(params);
-// console.log(myGen());
-// console.log(myGen());
-// console.log(myGen());
