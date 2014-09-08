@@ -15,15 +15,15 @@ function arrayGenerator(params) {
     maxNumber = params.charset.maxNumber || maxNumber;
   }
 
-  var stepLength = (maxLength - minLength) / steps + minLength;
-
+  var stepLength = (maxLength - minLength) / steps;
+  console.log("steplength", stepLength);
   return function() {
     callCounter++;
 
     if(callCounter > steps) return;
     var array = [];
     // make an array of stepLength * callCounter using random numbers from min to max
-    for(var i = 0; i < stepLength * callCounter; i++) {
+    for(var i = 0; i < (stepLength * callCounter) + minLength; i++) {
       array.push(randomIntFromInterval(minNumber, maxNumber));
     }
 
@@ -44,7 +44,14 @@ params = {
 
 module.exports = arrayGenerator;
 
-var myGen = arrayGenerator(params);
-console.log(myGen());
-console.log(myGen());
-console.log(myGen());
+// var myGen = arrayGenerator(params);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
+// console.log(myGen().length);
