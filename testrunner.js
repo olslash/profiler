@@ -1,5 +1,31 @@
 var arrayGenerator = require('./arrayGenerator');
 
+
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+  params = {
+    charset: {
+      // alpha: true, // random upper and lower letters
+      minNumber: 1,
+      maxNumber: 10
+    },
+    minLength: 5,
+    maxLength: 2000,
+    steps: 40
+  };
+  var options = {
+         title: 'Performance'
+       };
+  var myGen = arrayGenerator(params);
+  var data = google.visualization.arrayToDataTable(runTest(doathing, myGen));
+  console.log(data);
+  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+
+
+
 // given a function, run it until the generator returns undefn
 // time each function and insert results into rows of an array
 
@@ -16,12 +42,13 @@ function runTest(fn, generator) {
       return results;
     }
     var datasize = dataset.length;
-
-    var timer = process.hrtime();
+    var start = new Date();
+    // var timer = process.hrtime();
     fn(dataset);
-    var executiontime = process.hrtime(timer);
-    var decimalseconds = (executiontime[1] / 1000000000).toFixed(2);
-    var executionresult = +executiontime[0] + +decimalseconds;
+    // var executiontime = process.hrtime(timer);
+    // var decimalseconds = (executiontime[1] / 1000000000).toFixed(2);
+    // var executionresult = +executiontime[0] + +decimalseconds;
+    var executionresult = new Date() - start;
     results.push([datasize, executionresult]);
   }
 
@@ -33,18 +60,3 @@ var doathing = function(data) {
     assign = data + 20;
   }
 };
-
-params = {
-  charset: {
-    // alpha: true, // random upper and lower letters
-    minNumber: 1,
-    maxNumber: 100
-  },
-  minLength: 5,
-  maxLength: 20000,
-  steps: 10
-};
-
-var myGen = arrayGenerator(params);
-
-console.log(runTest(doathing, myGen))

@@ -30,27 +30,4 @@ function arrayGenerator(params) {
   };
 }
 
-params = {
-  charset: {
-    // alpha: true, // random upper and lower letters
-    minNumber: 1,
-    maxNumber: 10
-  },
-  minLength: 5,
-  maxLength: 20,
-  steps: 10
-};
-
 module.exports = arrayGenerator;
-
-// var myGen = arrayGenerator(params);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
-// console.log(myGen().length);
