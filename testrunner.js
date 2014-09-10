@@ -29,8 +29,10 @@ function drawChart(rawdata) {
          title: 'Performance',
          curveType: 'function',
          trendlines: { 0: {
-          color: "green",
-          lineWidth: 10
+           type: 'polynomial',
+           degree: 3,
+           color: "green",
+           lineWidth: 10
          } }
        };
   var data = google.visualization.arrayToDataTable(rawdata);
