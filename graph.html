@@ -1,10 +1,14 @@
 <html>
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="bundle.js"></script>
+    <script>
+    	google.load("visualization", "1", {packages:["corechart"]});
+    </script>
+    <!-- <script src="exampleTest.js"></script> -->
     
   </head>
   <body>
     <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <script src="bundle.js"></script>
   </body>
 </html>
