@@ -1,0 +1,24 @@
+{
+  "name": "profiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "testrunner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olslash/profiler.git"
+  },
+  "author": "mitch robb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olslash/profiler/issues"
+  },
+  "homepage": "https://github.com/olslash/profiler",
+  "dependencies": {
+    "browserify": "^5.11.1",
+    "gulp": "^3.8.8",
+    "vinyl-source-stream": "^1.0.0"
+  }
+}
